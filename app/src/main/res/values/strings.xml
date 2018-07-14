@@ -2,8 +2,13 @@
     <string name="app_name">SongsQueues</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title" translatable="false">SongsQueues</string>
+    <string name="nav_header_subtitle">github.com/HighSoftWare96</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="login_title">SongsQueues login</string>
+    <string name="signup_hint">Or signup with:</string>
 </resources>
