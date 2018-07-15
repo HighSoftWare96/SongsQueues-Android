@@ -5,4 +5,11 @@
     <string name="login">Login</string>
     <string name="login_title">SongsQueues login</string>
     <string name="signup_hint">Or signup with:</string>
+    <string name="lineups_menu">My lineups</string>
+    <string name="events_menu">My events</string>
+    <string name="songs_menu">My songs</string>
+    <string name="account_menu">My account</string>
+    <string name="settings_menu">Settings</string>
+    <string name="main_menu_cat">Tools</string>
+    <string name="settings_menu_cat">App settings</string>
 </resources>

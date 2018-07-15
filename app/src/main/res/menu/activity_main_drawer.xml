@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
+    <item
+        android:title="@string/main_menu_cat"
+        app:showAsAction="ifRoom|withText">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_lineups"
+                    android:icon="@drawable/music_queue"
+                    android:title="@string/lineups_menu" />
+                <item
+                    android:id="@+id/nav_songs"
+                    android:icon="@drawable/songs_icon"
+                    android:title="@string/songs_menu" />
+                <item
+                    android:id="@+id/nav_events"
+                    android:icon="@drawable/events_icon"
+                    android:title="@string/events_menu" />
+            </group>
         </menu>
     </item>
-
+    <item
+        android:title="@string/settings_menu_cat"
+        app:showAsAction="ifRoom|withText">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_account"
+                    android:icon="@drawable/user_icon"
+                    android:title="@string/account_menu" />
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/settings_icon"
+                    android:title="@string/settings_menu" />
+            </group>
+        </menu>
+    </item>
 </menu>

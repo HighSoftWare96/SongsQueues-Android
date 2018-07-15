@@ -1,18 +1,16 @@
-package com.highsoftware96.songsqueues;
+package com.highsoftware96.songsqueues.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.AttributeSet;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import com.highsoftware96.songsqueues.R;
+import com.highsoftware96.songsqueues.services.LoginManager;
 
 public class LoginAccessActivity extends AppCompatActivity {
 
@@ -23,6 +21,7 @@ public class LoginAccessActivity extends AppCompatActivity {
     private Button loginBtn;
     private ProgressBar progressBar;
     private LinearLayout loginFormLayout;
+    private LoginManager loginManager = LoginManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,18 @@ public class LoginAccessActivity extends AppCompatActivity {
         loginFormLayout = findViewById(R.id.loginFormLayout);
     }
 
+
     // PRIMITIVE per le views
+    /// Il buttone di login è stato clickato
     public void loginIntoApp(View view) {
+        // TODO: controllare le credenziali per loggarsi
         setOperationLogRunning(true);
         Intent intentToStartMainActivity = new Intent(this, MainActivity.class);
         // CHIAMO QUESTO INTENT SENZA FAR MEMORIZZARE CHE è STATO INSERITO QUINDI NON TORNERò PIU
         // SU QUESTA SCHERMATA COL BACK
         intentToStartMainActivity.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intentToStartMainActivity);
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
         this.finish();
     }
 
