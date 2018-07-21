@@ -1,5 +1,6 @@
 package com.highsoftware96.songsqueues.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +17,7 @@ import android.view.View;
 
 import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.constants.DrawerMenuFragmentsTag;
-import com.highsoftware96.songsqueues.fragments.SongLineupsFragment;
+import com.highsoftware96.songsqueues.fragments.songlineups.SongLineupsTabContainer;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,6 +84,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             Snackbar.make(findViewById(android.R.id.content), "Settings", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+        } else if (id == R.id.nav_share_app) {
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.shareapp_subject_text));
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.shareapp_body_text));
+            startActivity(Intent.createChooser(sharingIntent, "Share SongQueues"));
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -92,7 +99,7 @@ public class MainActivity extends AppCompatActivity
     private void setHomeFragmnetOnline() {
         // imposto il fragment di default da visualizzare nella homepage della applicazione
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_fragment_container, new SongLineupsFragment(), DrawerMenuFragmentsTag.HOME_FRAGMENT);
+        transaction.replace(R.id.main_fragment_container, new SongLineupsTabContainer(), DrawerMenuFragmentsTag.HOME_FRAGMENT);
         transaction.commit();
     }
 }

@@ -21,4 +21,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date_creation_list">Last modified:</string>
+    <string name="description_list">Description:</string>
+    <string name="songs_list">Songs:</string>
+    <string name="cat_menu_recents_string">Recents</string>
+    <string name="cat_menu_all_string">All</string>
+    <string name="action_search">Search</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="search_lineup_hint">Search for a lineup</string>
+    <string name="recent_tab_name">Recents</string>
+    <string name="all_tab_name">All</string>
+    <string name="action_new_category">Add new category</string>
+    <string name="action_logout">Logout</string>
+    <string name="share_it_nav">Share it!</string>
+    <string name="shareapp_subject_text">Sharing SongQueues for Android with you!</string>
+    <string name="shareapp_body_text">Hey there, I want to share with you a new app I\'ve installed: with SongQueues you can save in the cloud your musical lineup for your events and then have them on whatever Android device you want! Try that now: https://github.com/HighSoftWare96!</string>
 </resources>

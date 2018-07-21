@@ -39,4 +39,9 @@
             </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/nav_share_app"
+        android:checkable="false"
+        android:icon="@drawable/ic_menu_share"
+        android:title="@string/share_it_nav" />
 </menu>
