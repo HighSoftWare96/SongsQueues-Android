@@ -36,4 +36,6 @@
     <string name="share_it_nav">Share it!</string>
     <string name="shareapp_subject_text">Sharing SongQueues for Android with you!</string>
     <string name="shareapp_body_text">Hey there, I want to share with you a new app I\'ve installed: with SongQueues you can save in the cloud your musical lineup for your events and then have them on whatever Android device you want! Try that now: https://github.com/HighSoftWare96!</string>
+    <string name="delete_list_item_menu">Delete</string>
+    <string name="share_list_item_menu">Share</string>
 </resources>

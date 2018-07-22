@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/itemmenulineup_delete_action"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_ripple"
+        android:drawablePadding="-30dp"
+        android:drawableStart="@drawable/delete_icon"
+        android:padding="10dp"
+        android:text="@string/delete_list_item_menu"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryLight"
+        android:typeface="normal" />
+
+    <Button
+        android:id="@+id/itemmenulineup_share_action"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_ripple"
+        android:drawablePadding="-30dp"
+        android:drawableStart="@drawable/share_icon"
+        android:padding="10dp"
+        android:text="@string/share_list_item_menu"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryLight"
+        android:typeface="normal" />
+
+</LinearLayout>
