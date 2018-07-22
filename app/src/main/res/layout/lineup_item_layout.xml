@@ -123,6 +123,16 @@
             android:maxLines="1"
             android:padding="2dp" />
 
+        <ImageView
+            android:id="@+id/item_favourite_item"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/list_item_dots_button_menu"
+            android:layout_marginStart="-10dp"
+            android:layout_toEndOf="@+id/lineup_title_placeholder"
+            android:src="@drawable/favourite_full_icon"
+            android:visibility="invisible" />
+
     </RelativeLayout>
 
 </LinearLayout>

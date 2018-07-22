@@ -36,8 +36,8 @@
     <string name="share_it_nav">Share it!</string>
     <string name="shareapp_subject_text">Sharing SongQueues for Android with you!</string>
     <string name="shareapp_body_text">Hey there, I want to share with you a new app I\'ve installed: with SongQueues you can save in the cloud your musical lineup for your events and then have them on whatever Android device you want! Try that now: https://github.com/HighSoftWare96!</string>
-    <string name="delete_list_item_menu">Delete</string>
-    <string name="share_list_item_menu">Share</string>
+    <string name="delete_list_item_menu">Delete the lineup</string>
+    <string name="share_list_item_menu">Share the lineup</string>
     <string name="title_activity_lineup_presentation">LineupPresentationActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -128,4 +128,12 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="select_as_favourite_lineupmenuitem">Set favourite</string>
+    <string name="select_as_favourite_itemmenu">Make favourite</string>
+    <string name="remove_favourite_itemmenu">Remove favourite</string>
+    <string name="details_tab_name">Details</string>
+    <string name="lineup_component_tab_name">Lineup</string>
+    <string name="songs_tab_name">Songs</string>
+    <string name="play_lineup">Play</string>
+    <string name="action_delete">Delete</string>
 </resources>

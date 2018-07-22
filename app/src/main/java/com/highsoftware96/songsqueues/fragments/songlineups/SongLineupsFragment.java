@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -35,6 +37,7 @@ public class SongLineupsFragment extends Fragment {
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected RelativeLayout opaquePanelForListViewMenu;
     private ArrayList<Lineup> testLineups;
+    private SongLineupsListAdapter songLineupsListAdapter;
 
     public SongLineupsFragment() {
         testLineups = onSetupLineupsListContent(null);
@@ -58,13 +61,14 @@ public class SongLineupsFragment extends Fragment {
         this.opaquePanelForListViewMenu = v.findViewById(R.id.opaquePanelForListViewMenu);
         // LISTVIEW setup
         this.lineupsListView = v.findViewById(R.id.lineups_listview);
-        lineupsListView.setAdapter(new SongLineupsListAdapter(testLineups, this));
+        this.songLineupsListAdapter = new SongLineupsListAdapter(testLineups, this);
+        lineupsListView.setAdapter(this.songLineupsListAdapter);
         lineupsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 view.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
-                Toast.makeText(getContext(), "# " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "# " + testLineups.get(position).ID, Toast.LENGTH_SHORT).show();
                 // TODO: l'utente ha clickato su una lineup: apro i dettagli e l'activity con tutti questi elementi
                 Intent intentToSeeLineupDetails = new Intent();
                 intentToSeeLineupDetails.setClass(getContext(), LineupPresentationActivity.class);
@@ -80,7 +84,7 @@ public class SongLineupsFragment extends Fragment {
         lineupsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showListItemMenu(position);
+                showListItemMenu(position, id);
                 // L'evento è consumato non procedo oltre!
                 return true;
             }
@@ -91,6 +95,7 @@ public class SongLineupsFragment extends Fragment {
         this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                onRefreshLayout();
                 // TODO: faccio il refresh dei dati della app
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -104,24 +109,47 @@ public class SongLineupsFragment extends Fragment {
         // l'utente ha usato l'activity ed ha modificato l'intent: devo aggiornare la listview!
         if (requestCode == MainActivity.LINEUP_DETAILS_SEEN_INTENT_HAS_TO_REFRESH && resultCode == MainActivity.LINEUP_DETAILS_MODIFIED_REFRESH_DATA_REQUIRED) {
             // TODO: refreshare la home!
+            onRefreshLayout();
             Toast.makeText(getContext(), "view da aggiornare!", Toast.LENGTH_SHORT).show();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void showListItemMenu(final int position) {
+    public void showListItemMenu(final int position, final long lineupID) {
         // Creo un menu di popup che compare dal basso
         PopupWindow popupMenu = new PopupWindow(getActivity());
         LayoutInflater inflater = getLayoutInflater();
         // inserisco il layout con i tasti opzioni per l'elemento
         View itemMenuView = inflater.inflate(R.layout.lineup_item_menu_layout, null);
         // IMPOSTAZIONE DEI LISTENER DEi BOTTONi del menu
+        Button favouriteButton = itemMenuView.findViewById(R.id.itemmenulineup_favourite_action);
+        if (testLineups.get(position).Favourite) {
+            favouriteButton.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_full_icon), null, null, null);
+            favouriteButton.setText(getString(R.string.remove_favourite_itemmenu));
+        }
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "FAVOURITE: " + position + "#" + lineupID, Toast.LENGTH_SHORT).show();
+                if (!testLineups.get(position).Favourite) {
+                    ((Button) v).setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_full_icon), null, null, null);
+                    ((Button) v).setText(getString(R.string.remove_favourite_itemmenu));
+                    testLineups.get(position).Favourite = true;
+                    // TODO: renderlo favorito o no su cloud
+                } else {
+                    ((Button) v).setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_empty_icon), null, null, null);
+                    ((Button) v).setText(getString(R.string.select_as_favourite_itemmenu));
+                    testLineups.get(position).Favourite = false;
+                }
+            }
+        });
+
         itemMenuView.findViewById(R.id.itemmenulineup_delete_action).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // recupero il tag con l'indice
                 // SONO Nello scope quindi posso usare POSITION per trovare chi è stato clickato!
-                Toast.makeText(getActivity(), "DELETE: " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "DELETE: " + position + "#" + lineupID, Toast.LENGTH_SHORT).show();
                 // TODO: l'utente ha clickato sul bottone di delete dell'elemento
             }
         });
@@ -130,7 +158,7 @@ public class SongLineupsFragment extends Fragment {
             public void onClick(View v) {
                 // recupero il tag con l'indice
                 // SONO Nello scope quindi posso usare POSITION per trovare chi è stato clickato!
-                Toast.makeText(getActivity(), "SHARE: " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "SHARE: " + position + "#" + lineupID, Toast.LENGTH_SHORT).show();
                 // TODO: l'utente ha clickato sul bottone di share dell'elemento
             }
         });
@@ -155,9 +183,14 @@ public class SongLineupsFragment extends Fragment {
         popupMenu.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                onRefreshLayout();
                 // Tolgo il pannello dell'opacità sotto il menu
                 opaquePanelForListViewMenu.animate().setDuration(200).alpha(0f);
             }
         });
+    }
+
+    public void onRefreshLayout() {
+        this.songLineupsListAdapter.notifyDataSetChanged();
     }
 }

@@ -35,7 +35,7 @@ public class SongLineupsListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return dataToDisplay.get(position).ID;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SongLineupsListAdapter extends BaseAdapter {
         menuItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contextFragment.showListItemMenu(position);
+                contextFragment.showListItemMenu(position, dataToDisplay.get(position).ID);
             }
         });
         TextView description = convertView.findViewById(R.id.description_placeholder);
@@ -61,6 +61,7 @@ public class SongLineupsListAdapter extends BaseAdapter {
         songs.setText(dataToDisplay.get(position).getSongsDescription());
         ImageView preview = convertView.findViewById(R.id.preview_image_placeholder);
         preview.setImageDrawable(this.contextFragment.getResources().getDrawable(dataToDisplay.get(position).PresentationImageID));
+        convertView.findViewById(R.id.item_favourite_item).setVisibility(dataToDisplay.get(position).Favourite ? View.VISIBLE : View.INVISIBLE);
         return convertView;
     }
 }

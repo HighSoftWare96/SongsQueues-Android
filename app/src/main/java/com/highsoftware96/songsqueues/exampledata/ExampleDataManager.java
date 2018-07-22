@@ -7,10 +7,11 @@ import com.highsoftware96.songsqueues.models.local.LineupCategory;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ExampleDataManager {
     public static Lineup getOneLineUp() {
-        return new Lineup("1234", "My new lineup", "This is a long description about this particular lineup created by a musician for a particular event...", R.drawable.template_test, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), null, getCategories().get(0));
+        return new Lineup(new Random().nextLong(), "My new lineup", "This is a long description about this particular lineup created by a musician for a particular event...", R.drawable.template_test, new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), null, getCategories().get(0));
     }
 
     public static ArrayList<LineupCategory> getCategories() {

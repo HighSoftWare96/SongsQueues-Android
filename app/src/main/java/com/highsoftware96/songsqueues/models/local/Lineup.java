@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Lineup implements Serializable {
-    public String ID;
+    public long ID;
     public String Title;
     public String Description;
     public int PresentationImageID;
@@ -13,8 +13,9 @@ public class Lineup implements Serializable {
     public Timestamp DateLastModified;
     public ArrayList<Song> Songs;
     public LineupCategory Category;
+    public boolean Favourite;
 
-    public Lineup(String ID, String Title, String description, int PresentationImage, Timestamp DateCreation, Timestamp DateLastModified, ArrayList<Song> Songs, LineupCategory category) {
+    public Lineup(long ID, String Title, String description, int PresentationImage, Timestamp DateCreation, Timestamp DateLastModified, ArrayList<Song> Songs, LineupCategory category) {
         this.ID = ID;
         this.Title = Title;
         this.Description = description;
@@ -34,5 +35,9 @@ public class Lineup implements Serializable {
             return desc.toString().substring(0, desc.length() - 2);
         }
         return "-";
+    }
+
+    public void setFavourite(boolean favourite) {
+        Favourite = favourite;
     }
 }

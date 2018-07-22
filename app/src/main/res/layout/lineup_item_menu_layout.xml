@@ -13,15 +13,15 @@
         android:background="@color/colorAccent" />
 
     <Button
-        android:id="@+id/itemmenulineup_delete_action"
+        android:id="@+id/itemmenulineup_favourite_action"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/simple_ripple"
         android:drawablePadding="-30dp"
-        android:drawableStart="@drawable/delete_icon"
+        android:drawableStart="@drawable/favourite_empty_icon"
         android:padding="10dp"
-        android:text="@string/delete_list_item_menu"
+        android:text="@string/select_as_favourite_itemmenu"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryLight"
         android:typeface="normal" />
@@ -40,4 +40,18 @@
         android:textColor="@color/colorPrimaryLight"
         android:typeface="normal" />
 
+
+    <Button
+        android:id="@+id/itemmenulineup_delete_action"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_ripple"
+        android:drawablePadding="-30dp"
+        android:drawableStart="@drawable/delete_icon"
+        android:padding="10dp"
+        android:text="@string/delete_list_item_menu"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryLight"
+        android:typeface="normal" />
 </LinearLayout>
