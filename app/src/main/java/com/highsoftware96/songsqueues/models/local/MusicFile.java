@@ -1,8 +1,9 @@
 package com.highsoftware96.songsqueues.models.local;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-class MusicFile extends LineupAttachment {
+class MusicFile extends LineupAttachment implements Serializable {
 
     /// mappa che contiene per ogni istante di tempo inserito in millisecondi una nota
     public HashMap<Long, String> Placeholders;

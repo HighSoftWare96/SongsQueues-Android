@@ -22,6 +22,11 @@ import com.highsoftware96.songsqueues.fragments.songlineups.SongLineupsTabContai
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int LINEUP_DETAILS_SEEN_INTENT_HAS_TO_REFRESH = 1;
+    public static final String LINEUP_REFERRED_INTENT_EXTRA = "LINEUP_REFERRED_INTENT_EXTRA";
+    public static final int LINEUP_DETAILS_MODIFIED_REFRESH_DATA_REQUIRED = 2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO: implementare l'aggiunta di un elemento
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -102,4 +108,5 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.main_fragment_container, new SongLineupsTabContainer(), DrawerMenuFragmentsTag.HOME_FRAGMENT);
         transaction.commit();
     }
+
 }

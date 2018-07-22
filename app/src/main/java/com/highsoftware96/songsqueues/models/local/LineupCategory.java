@@ -1,6 +1,8 @@
 package com.highsoftware96.songsqueues.models.local;
 
-public class LineupCategory {
+import java.io.Serializable;
+
+public class LineupCategory implements Serializable {
     public String Name;
     public boolean SystemCategory;
 

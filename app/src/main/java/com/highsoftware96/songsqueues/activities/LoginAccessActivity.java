@@ -47,7 +47,6 @@ public class LoginAccessActivity extends AppCompatActivity {
         Intent intentToStartMainActivity = new Intent(this, MainActivity.class);
         // CHIAMO QUESTO INTENT SENZA FAR MEMORIZZARE CHE è STATO INSERITO QUINDI NON TORNERò PIU
         // SU QUESTA SCHERMATA COL BACK
-        intentToStartMainActivity.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intentToStartMainActivity);
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
         this.finish();

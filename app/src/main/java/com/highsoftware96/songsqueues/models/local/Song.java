@@ -1,8 +1,9 @@
 package com.highsoftware96.songsqueues.models.local;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-class Song {
+class Song implements Serializable {
     public String Name;
     public ArrayList<LineupAttachment> Documents;
     public ArrayList<MusicFile> MusicFiles;

@@ -1,6 +1,8 @@
 package com.highsoftware96.songsqueues.models.local;
 
-class LineupAttachment {
+import java.io.Serializable;
+
+class LineupAttachment implements Serializable {
     public String RemoteRelativePath;
     public String LocalPath;
     public String Base64String;

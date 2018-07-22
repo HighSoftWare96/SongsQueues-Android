@@ -1,9 +1,10 @@
 package com.highsoftware96.songsqueues.models.local;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Lineup {
+public class Lineup implements Serializable {
     public String ID;
     public String Title;
     public String Description;
