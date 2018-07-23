@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/event_title_notification_edit_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/notification_icon_dark"
+        android:padding="15dp"
+        android:text="Event name"
+        android:textAlignment="textEnd"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <Switch
+        android:id="@+id/event_edit_active_notification_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/event_notification_menu_activate_not"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/event_edit_select_notification_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical|center"
+        android:padding="15dp"
+        android:text="@string/event_edit_select_notification_mode"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|start|end"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="190dp">
+
+        <Button
+            android:id="@+id/dialog_ok_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/simple_ripple"
+            android:text="@string/ok_string"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/dialog_cancel_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/simple_ripple"
+            android:text="@string/cancel_string" />
+    </LinearLayout>
+
+</LinearLayout>

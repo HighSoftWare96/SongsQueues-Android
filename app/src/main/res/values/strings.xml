@@ -136,4 +136,21 @@
     <string name="songs_tab_name">Songs</string>
     <string name="play_lineup">Play</string>
     <string name="action_delete">Delete</string>
+    <string name="metadata">Metadata</string>
+    <string name="data_creation">Created on:</string>
+    <string name="data_last_modified">Last modified on:</string>
+    <string name="description">Description</string>
+    <string name="data_category">Category:</string>
+    <string name="events">Related events</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirmdialog_confirm_text_default">Are you sure?</string>
+    <string name="sure_delete_lineup">Are you sure to delete this lineup?</string>
+    <string name="new_event_action">Add new event</string>
+    <string name="add_event_hint">Add a new event</string>
+    <string name="edit_eventname_hint">Event title</string>
+    <string name="ok_string">Ok</string>
+    <string name="cancel_string">Cancel</string>
+    <string name="event_notification_menu_activate_not">Notify me</string>
+    <string name="event_edit_select_notification_mode">Set the notification</string>
 </resources>

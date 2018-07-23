@@ -10,4 +10,9 @@ public class LineupCategory implements Serializable {
         this.Name = name;
         this.SystemCategory = systemCategory;
     }
+
+    @Override
+    public String toString() {
+        return this.Name;
+    }
 }

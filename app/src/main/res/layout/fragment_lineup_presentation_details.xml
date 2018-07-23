@@ -5,10 +5,153 @@
     android:layout_height="match_parent"
     tools:context=".fragments.songlineupsdetails.LineupPresentationDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/description_icon"
+            android:drawablePadding="-30dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical"
+            android:padding="7dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/description"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/description_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="-" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/event_icon"
+            android:drawablePadding="-30dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical"
+            android:padding="7dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/events"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/lineup_events_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_ripple"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="15dp"
+            android:text="@string/new_event_action"
+            android:textAlignment="center"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/metadata_icon"
+            android:drawablePadding="-30dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical"
+            android:padding="7dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/metadata"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="@string/data_creation"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/data_creation_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="-"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="@string/data_last_modified"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/data_lastmodified_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="-"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="@string/data_category"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/data_category_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:text="-"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

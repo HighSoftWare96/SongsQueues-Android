@@ -5,7 +5,12 @@
         android:id="@+id/actionDetails_play_lineup"
         android:icon="@drawable/play_icon"
         android:title="@string/play_lineup"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/actionDetails_favourite_lineup"
+        android:icon="@drawable/favourite_empty_icon_light"
+        android:title="@string/select_as_favourite_itemmenu"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/actionDetails_refresh_lineup"
         android:icon="@drawable/refresh_icon"
@@ -13,7 +18,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/actionDetails_delete_lineup"
-        android:icon="@drawable/refresh_icon"
+        android:icon="@drawable/delete_icon"
         android:title="@string/action_delete"
         app:showAsAction="never" />
 </menu>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/confirmdialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/confirmdialog_confirm_text_default"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/confirmdialog_ok"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_ripple_red"
+            android:padding="10dp"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_red_dark"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/confirmdialog_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/simple_ripple"
+            android:padding="10dp"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryLight"
+            android:typeface="normal" />
+    </LinearLayout>
+
+
+</LinearLayout>

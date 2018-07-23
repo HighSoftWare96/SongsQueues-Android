@@ -1,5 +1,6 @@
 package com.highsoftware96.songsqueues.fragments.songlineups;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,6 +26,7 @@ import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.activities.LineupPresentationActivity;
 import com.highsoftware96.songsqueues.activities.MainActivity;
 import com.highsoftware96.songsqueues.adapter.SongLineupsListAdapter;
+import com.highsoftware96.songsqueues.dialogs.ConfirmDialog;
 import com.highsoftware96.songsqueues.exampledata.ExampleDataManager;
 import com.highsoftware96.songsqueues.models.local.Lineup;
 
@@ -38,6 +39,10 @@ public class SongLineupsFragment extends Fragment {
     protected RelativeLayout opaquePanelForListViewMenu;
     private ArrayList<Lineup> testLineups;
     private SongLineupsListAdapter songLineupsListAdapter;
+
+    private PopupWindow popupMenu;
+    private int selectedItemPosition;
+    private long selectedItemID;
 
     public SongLineupsFragment() {
         testLineups = onSetupLineupsListContent(null);
@@ -63,12 +68,15 @@ public class SongLineupsFragment extends Fragment {
         this.lineupsListView = v.findViewById(R.id.lineups_listview);
         this.songLineupsListAdapter = new SongLineupsListAdapter(testLineups, this);
         lineupsListView.setAdapter(this.songLineupsListAdapter);
+        // impostazione listener per il click su un elemento della lista: apro l'activity
+        // con i dettagli della lineup
         lineupsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                view.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
-                Toast.makeText(getContext(), "# " + testLineups.get(position).ID, Toast.LENGTH_SHORT).show();
+                // imposto la lineup selezionata (per sicurezza)
+                setSelectedLineup(position, id);
+                //view.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bounce));
                 // TODO: l'utente ha clickato su una lineup: apro i dettagli e l'activity con tutti questi elementi
                 Intent intentToSeeLineupDetails = new Intent();
                 intentToSeeLineupDetails.setClass(getContext(), LineupPresentationActivity.class);
@@ -81,9 +89,12 @@ public class SongLineupsFragment extends Fragment {
         });
 
         // Se l'utente preme per molto tempo su un elemento apro il menu
+        // listener per click a lungo termine
         lineupsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // mostro il menu con tutte le opzioni
                 showListItemMenu(position, id);
                 // L'evento è consumato non procedo oltre!
                 return true;
@@ -104,6 +115,11 @@ public class SongLineupsFragment extends Fragment {
         return v;
     }
 
+    private void setSelectedLineup(int position, long id) {
+        selectedItemID = id;
+        selectedItemPosition = position;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // l'utente ha usato l'activity ed ha modificato l'intent: devo aggiornare la listview!
@@ -116,14 +132,17 @@ public class SongLineupsFragment extends Fragment {
     }
 
     public void showListItemMenu(final int position, final long lineupID) {
+        // imposto il lineup selezionato
+        setSelectedLineup(position, lineupID);
+
         // Creo un menu di popup che compare dal basso
-        PopupWindow popupMenu = new PopupWindow(getActivity());
+        popupMenu = new PopupWindow(getActivity());
         LayoutInflater inflater = getLayoutInflater();
         // inserisco il layout con i tasti opzioni per l'elemento
         View itemMenuView = inflater.inflate(R.layout.lineup_item_menu_layout, null);
         // IMPOSTAZIONE DEI LISTENER DEi BOTTONi del menu
         Button favouriteButton = itemMenuView.findViewById(R.id.itemmenulineup_favourite_action);
-        if (testLineups.get(position).Favourite) {
+        if (testLineups.get(position).getFavourite()) {
             favouriteButton.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_full_icon), null, null, null);
             favouriteButton.setText(getString(R.string.remove_favourite_itemmenu));
         }
@@ -131,15 +150,15 @@ public class SongLineupsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "FAVOURITE: " + position + "#" + lineupID, Toast.LENGTH_SHORT).show();
-                if (!testLineups.get(position).Favourite) {
+                if (!testLineups.get(position).getFavourite()) {
                     ((Button) v).setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_full_icon), null, null, null);
                     ((Button) v).setText(getString(R.string.remove_favourite_itemmenu));
-                    testLineups.get(position).Favourite = true;
+                    testLineups.get(position).setFavourite(true);
                     // TODO: renderlo favorito o no su cloud
                 } else {
                     ((Button) v).setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getContext(), R.drawable.favourite_empty_icon), null, null, null);
                     ((Button) v).setText(getString(R.string.select_as_favourite_itemmenu));
-                    testLineups.get(position).Favourite = false;
+                    testLineups.get(position).setFavourite(false);
                 }
             }
         });
@@ -149,7 +168,7 @@ public class SongLineupsFragment extends Fragment {
             public void onClick(View v) {
                 // recupero il tag con l'indice
                 // SONO Nello scope quindi posso usare POSITION per trovare chi è stato clickato!
-                Toast.makeText(getActivity(), "DELETE: " + position + "#" + lineupID, Toast.LENGTH_SHORT).show();
+                new SongLineupsFragmentConfirmDialog(getString(R.string.sure_delete_lineup), getActivity(), null).show();
                 // TODO: l'utente ha clickato sul bottone di delete dell'elemento
             }
         });
@@ -192,5 +211,37 @@ public class SongLineupsFragment extends Fragment {
 
     public void onRefreshLayout() {
         this.songLineupsListAdapter.notifyDataSetChanged();
+    }
+
+    private void deleteItem() {
+        Toast.makeText(getActivity(), "DELETE: " + this.selectedItemPosition + "#" + this.selectedItemID, Toast.LENGTH_SHORT).show();
+        // TODO: eliminare l'elemento
+    }
+
+    /**
+     * Classe specializzata per il confirm dialog nostro della cancellazione di un lineup
+     *
+     * @see ConfirmDialog
+     */
+    private class SongLineupsFragmentConfirmDialog extends ConfirmDialog {
+
+
+        public SongLineupsFragmentConfirmDialog(@Nullable String query, Activity parentActivity, @Nullable View opaquePanelBackground) {
+            super(query, parentActivity, opaquePanelBackground);
+        }
+
+        @Override
+        public void onAfterConfirmDialogDismiss() {
+            if (getConfirm()) {
+                // l'utente ha messo SI
+                deleteItem();
+                // TODO: eliminato s
+                popupMenu.dismiss();
+            } else {
+                // l'utente ha messo NO
+                // TODO
+            }
+        }
+
     }
 }

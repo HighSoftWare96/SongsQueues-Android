@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class SongLineupsListAdapter extends BaseAdapter {
 
+    // TODO: impostare i dati da mostrare come i dati globali!
     private ArrayList<Lineup> dataToDisplay;
     private SongLineupsFragment contextFragment;
 
@@ -35,7 +36,7 @@ public class SongLineupsListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return dataToDisplay.get(position).ID;
+        return dataToDisplay.get(position).getID();
     }
 
     @Override
@@ -43,25 +44,25 @@ public class SongLineupsListAdapter extends BaseAdapter {
         convertView = this.contextFragment.getLayoutInflater().inflate(R.layout.lineup_item_layout, null);
         ImageButton menuItemBtn = convertView.findViewById(R.id.list_item_dots_button_menu);
         // imposto il tag del bottone con la posizione della view creata all'intenro della lista
-        menuItemBtn.setTag(position);
+        menuItemBtn.setTag(dataToDisplay.get(position).getID());
         // imposto il listener creato per aprire il menu per ciascun elemento della lista
         menuItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contextFragment.showListItemMenu(position, dataToDisplay.get(position).ID);
+                contextFragment.showListItemMenu(position, dataToDisplay.get(position).getID());
             }
         });
         TextView description = convertView.findViewById(R.id.description_placeholder);
-        description.setText(dataToDisplay.get(position).Description);
+        description.setText(dataToDisplay.get(position).getDescription());
         TextView title = convertView.findViewById(R.id.lineup_title_placeholder);
-        title.setText(dataToDisplay.get(position).Title);
+        title.setText(dataToDisplay.get(position).getTitle());
         TextView lastModified = convertView.findViewById(R.id.last_modified_placeholder);
-        lastModified.setText(dataToDisplay.get(position).DateLastModified.toString());
+        lastModified.setText(dataToDisplay.get(position).getDateLastModified().toString());
         TextView songs = convertView.findViewById(R.id.songs_placeholder);
         songs.setText(dataToDisplay.get(position).getSongsDescription());
         ImageView preview = convertView.findViewById(R.id.preview_image_placeholder);
-        preview.setImageDrawable(this.contextFragment.getResources().getDrawable(dataToDisplay.get(position).PresentationImageID));
-        convertView.findViewById(R.id.item_favourite_item).setVisibility(dataToDisplay.get(position).Favourite ? View.VISIBLE : View.INVISIBLE);
+        //preview.setImageDrawable(this.contextFragment.getResources().getDrawable(dataToDisplay.get(position).getPresentationImageID()));
+        convertView.findViewById(R.id.item_favourite_item).setVisibility(dataToDisplay.get(position).getFavourite() ? View.VISIBLE : View.INVISIBLE);
         return convertView;
     }
 }

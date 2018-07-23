@@ -19,6 +19,7 @@ import com.highsoftware96.songsqueues.adapter.LineupPresentationTabsAdapter;
 import com.highsoftware96.songsqueues.models.local.Lineup;
 
 public class LineupPresentationActivity extends AppCompatActivity {
+
     private Intent originalIntent;
     private Lineup selectedLineupToShow;
     private Toolbar toolbar;
@@ -58,10 +59,11 @@ public class LineupPresentationActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.originalIntent = getIntent();
         this.selectedLineupToShow = (Lineup) originalIntent.getSerializableExtra(MainActivity.LINEUP_REFERRED_INTENT_EXTRA);
-        this.toolbar.setTitle(selectedLineupToShow.Title);
+        this.toolbar.setTitle(selectedLineupToShow.getTitle());
         setSupportActionBar(toolbar);
         // mostro il pulsante di back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +79,9 @@ public class LineupPresentationActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.lineup_details_menu, menu);
+        if (selectedLineupToShow.getFavourite()) {
+            menu.findItem(R.id.actionDetails_favourite_lineup).setIcon(R.drawable.favourite_full_icon);
+        }
         return true;
     }
 
@@ -89,6 +94,16 @@ public class LineupPresentationActivity extends AppCompatActivity {
             case R.id.actionDetails_delete_lineup:
                 break;
             case R.id.actionDetails_play_lineup:
+                break;
+            case R.id.actionDetails_favourite_lineup:
+                // TODO: applicare il cambiamento dei dati in senso globale!
+                if (!this.selectedLineupToShow.getFavourite()) {
+                    this.selectedLineupToShow.setFavourite(true);
+                    item.setIcon(R.drawable.favourite_full_icon);
+                } else {
+                    this.selectedLineupToShow.setFavourite(false);
+                    item.setIcon(R.drawable.favourite_empty_icon_light);
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -106,5 +121,9 @@ public class LineupPresentationActivity extends AppCompatActivity {
         setResult(MainActivity.LINEUP_DETAILS_MODIFIED_REFRESH_DATA_REQUIRED);
         finish();
         overridePendingTransition(R.anim.bounce, R.anim.slide_out_down);
+    }
+
+    public Lineup getSelectedLineupToShow() {
+        return selectedLineupToShow;
     }
 }
