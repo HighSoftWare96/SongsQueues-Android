@@ -82,7 +82,7 @@ public abstract class ConfirmDialog extends PopupWindow {
         this.showAsDropDown(parent.findViewById(R.id.popupMenuAnchorDivider));
     }
 
-    public boolean getConfirm() {
+    protected boolean getConfirm() {
         return this.yesOrNo;
     }
 
@@ -94,7 +94,7 @@ public abstract class ConfirmDialog extends PopupWindow {
             opaquePanelBackground.animate().setDuration(200).alpha(0f);
         // chiamo il metodo che deve implementare l'utente che utilizza la classe in cui puo recuperare tutte
         // le robe che gli servono per verificare cosa l'utente ha confermato (si o no)
-        onAfterConfirmDialogDismiss();
+        onAfterConfirmDialogDismiss(getConfirm());
     }
 
     /**
@@ -109,5 +109,5 @@ public abstract class ConfirmDialog extends PopupWindow {
      * @see com.highsoftware96.songsqueues.fragments.songlineups.SongLineupsFragment.SongLineupsFragmentConfirmDialog
      * @see ConfirmDialog
      */
-    public abstract void onAfterConfirmDialogDismiss();
+    public abstract void onAfterConfirmDialogDismiss(boolean confirmation);
 }

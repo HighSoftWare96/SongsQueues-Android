@@ -28,7 +28,6 @@ public class NotificationSelectEventDialog extends Dialog implements View.OnClic
     private TextView notificationModeTextViewBtn;
     private int positionInList;
 
-    // TODO: l'evento si aggiorna anche quando non deve...
     public NotificationSelectEventDialog(@NonNull Context context, LineupPresentationDetailsFragment parentFragment, Event referredLineupEvent, int eventPositionInList) {
         super(context);
         this.parentFragment = parentFragment;

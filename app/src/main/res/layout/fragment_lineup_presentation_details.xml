@@ -58,7 +58,7 @@
             android:padding="3dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/add_new_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/simple_ripple"
@@ -152,6 +152,15 @@
                 android:padding="15dp"
                 android:text="-"
                 android:textAlignment="textEnd" />
+
         </LinearLayout>
+
+        <View
+            android:id="@+id/popupMenuAnchorDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="?android:attr/listDivider" />
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

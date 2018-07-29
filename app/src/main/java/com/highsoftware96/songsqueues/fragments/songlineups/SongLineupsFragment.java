@@ -231,15 +231,12 @@ public class SongLineupsFragment extends Fragment {
         }
 
         @Override
-        public void onAfterConfirmDialogDismiss() {
-            if (getConfirm()) {
+        public void onAfterConfirmDialogDismiss(boolean confirmation) {
+            if (confirmation) {
                 // l'utente ha messo SI
                 deleteItem();
                 // TODO: eliminato s
                 popupMenu.dismiss();
-            } else {
-                // l'utente ha messo NO
-                // TODO
             }
         }
 

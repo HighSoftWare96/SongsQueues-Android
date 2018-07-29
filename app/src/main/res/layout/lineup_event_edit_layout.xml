@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="480dp"
     android:gravity="bottom|center_vertical|center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <EditText
         android:id="@+id/event_title_edit_picker"
@@ -19,7 +20,7 @@
 
     <CalendarView
         android:id="@+id/event_date_edit_picker"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <View
@@ -33,11 +34,12 @@
         android:layout_height="match_parent"
         android:gravity="bottom|left|end"
         android:orientation="horizontal"
-        android:padding="20dp"
-        android:paddingStart="190dp">
+        android:paddingEnd="10dp"
+        android:paddingStart="130dp">
 
         <Button
             android:id="@+id/dialog_ok_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,6 +49,7 @@
 
         <Button
             android:id="@+id/dialog_cancel_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

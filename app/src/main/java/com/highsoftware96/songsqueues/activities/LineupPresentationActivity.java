@@ -24,6 +24,11 @@ public class LineupPresentationActivity extends AppCompatActivity {
     private Intent originalIntent;
     private Lineup selectedLineupToShow;
     private Toolbar toolbar;
+    /**
+     * Se sono state fatte modifiche allora imposto questo flag a true e ritornerà l'activity
+     * con un altro flag per aggiornare la view.
+     */
+    private boolean isDataToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,7 @@ public class LineupPresentationActivity extends AppCompatActivity {
             }
         });
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         this.originalIntent = getIntent();
         this.selectedLineupToShow = (Lineup) originalIntent.getSerializableExtra(MainActivity.LINEUP_REFERRED_INTENT_EXTRA);
         this.toolbar.setTitle(selectedLineupToShow.getTitle());
@@ -66,7 +71,7 @@ public class LineupPresentationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +124,8 @@ public class LineupPresentationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // TODO: se l'utente ha modificato i dati del lineup!
-        setResult(MainActivity.LINEUP_DETAILS_MODIFIED_REFRESH_DATA_REQUIRED);
+        if (isDataToRefresh)
+            setResult(MainActivity.LINEUP_DETAILS_MODIFIED_REFRESH_DATA_REQUIRED);
         finish();
         overridePendingTransition(R.anim.bounce, R.anim.slide_out_down);
     }
@@ -130,6 +136,25 @@ public class LineupPresentationActivity extends AppCompatActivity {
 
     public void saveEventData(Event referredLineupEvent, int positionInList) {
         // TODO: Salvare i dati dell'evento modificato
+        this.isDataToRefresh = true;
         this.selectedLineupToShow.getEvents().set(positionInList, referredLineupEvent);
+    }
+
+    public void addNewEvent(Event newEvent) {
+        // TODO: Aggiungere il nuovo evento online!
+        this.isDataToRefresh = true;
+        this.selectedLineupToShow.getEvents().add(newEvent);
+    }
+
+    public void deleteEvent(int positionInList) {
+        // TODO: Eliminare l'evento online!
+        this.isDataToRefresh = true;
+        this.selectedLineupToShow.getEvents().remove(positionInList);
+    }
+
+    public void editEvent(int eventPositionInList, Event editedEvent) {
+        // TODO: modificare l'evento online
+        this.isDataToRefresh = true;
+        this.selectedLineupToShow.getEvents().set(eventPositionInList, editedEvent);
     }
 }

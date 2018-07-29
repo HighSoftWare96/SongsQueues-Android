@@ -13,12 +13,14 @@ import android.widget.TextView;
 import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.activities.LineupPresentationActivity;
 import com.highsoftware96.songsqueues.adapter.LineupEventsListAdapter;
+import com.highsoftware96.songsqueues.dialogs.ConfirmDialog;
+import com.highsoftware96.songsqueues.dialogs.EditEventDialog;
+import com.highsoftware96.songsqueues.dialogs.NewEventDialog;
 import com.highsoftware96.songsqueues.dialogs.NotificationSelectEventDialog;
 import com.highsoftware96.songsqueues.models.local.Event;
-import com.highsoftware96.songsqueues.models.local.Lineup;
 
 
-public class LineupPresentationDetailsFragment extends Fragment {
+public class LineupPresentationDetailsFragment extends Fragment implements View.OnClickListener {
 
     private ListView eventsListView;
     private TextView descriptionTextView;
@@ -26,6 +28,7 @@ public class LineupPresentationDetailsFragment extends Fragment {
     private TextView lastModifiedTextView;
     private TextView categoryTextView;
     private LineupEventsListAdapter eventsListAdapter;
+    private TextView addNewEventBtn;
 
     public LineupPresentationDetailsFragment() {
         // Required empty public constructor
@@ -45,6 +48,9 @@ public class LineupPresentationDetailsFragment extends Fragment {
         this.creationDateTextView.setText(((LineupPresentationActivity) getActivity()).getSelectedLineupToShow().getDateCreation().toString());
         this.lastModifiedTextView = v.findViewById(R.id.data_lastmodified_placeholder);
         this.lastModifiedTextView.setText(((LineupPresentationActivity) getActivity()).getSelectedLineupToShow().getDateLastModified().toString());
+
+        this.addNewEventBtn = v.findViewById(R.id.add_new_event);
+        this.addNewEventBtn.setOnClickListener(this);
 
         // settings della listview
         this.eventsListView = v.findViewById(R.id.lineup_events_list_view);
@@ -77,9 +83,16 @@ public class LineupPresentationDetailsFragment extends Fragment {
         listView.setLayoutParams(params);
     }
 
-    public void editEventItemAction(int eventPositionInList) {
+    public void editEventItemAction(final int eventPositionInList) {
         // TODO: l'utente ha clickato il bottone di modifica di un evento
         Snackbar.make(getActivity().findViewById(android.R.id.content), "Modifica evento #" + eventPositionInList, Snackbar.LENGTH_SHORT).show();
+        EditEventDialog editEventDialog = new EditEventDialog(getContext(), this, ((LineupPresentationActivity) getActivity()).getSelectedLineupToShow().getEvents().get(eventPositionInList)) {
+            @Override
+            public void onEventReturn(Event resultEvent) {
+                editEvent(resultEvent, eventPositionInList);
+            }
+        };
+        editEventDialog.show();
     }
 
     public void notificationEventItemAction(int eventPositionInList) {
@@ -89,14 +102,57 @@ public class LineupPresentationDetailsFragment extends Fragment {
         notificationSelectEventDialog.show();
     }
 
-    public void deleteEventItemAction(int eventPositionInList) {
+    public void deleteEventItemAction(final int eventPositionInList) {
         // TODO: l'utente ha clickato il bottone di cancellazione di un evento
         Snackbar.make(getActivity().findViewById(android.R.id.content), "Cancellazione evento #" + eventPositionInList, Snackbar.LENGTH_SHORT).show();
+        ConfirmDialog confirmDialog = new ConfirmDialog(null, getActivity(), null) {
+            @Override
+            public void onAfterConfirmDialogDismiss(boolean confirmation) {
+                if (confirmation) {
+                    deleteEvent(eventPositionInList);
+                }
+            }
+        };
+        confirmDialog.show();
+    }
 
+    private void editEvent(Event resultEvent, int eventPositionInList) {
+        ((LineupPresentationActivity) getActivity()).editEvent(eventPositionInList, resultEvent);
+        this.eventsListAdapter.notifyDataSetChanged();
+        this.setListViewHeightBasedOnChildren(this.eventsListView);
+    }
+
+    public void deleteEvent(int positionInList) {
+        ((LineupPresentationActivity) getActivity()).deleteEvent(positionInList);
+        this.eventsListAdapter.notifyDataSetChanged();
+        this.setListViewHeightBasedOnChildren(this.eventsListView);
     }
 
     public void saveEventData(Event referredLineupEvent, int positionInList) {
         ((LineupPresentationActivity) getActivity()).saveEventData(referredLineupEvent, positionInList);
         this.eventsListAdapter.notifyDataSetChanged();
+    }
+
+    public void addNewEvent(Event newEvent) {
+        ((LineupPresentationActivity) getActivity()).addNewEvent(newEvent);
+        this.eventsListAdapter.notifyDataSetChanged();
+        this.setListViewHeightBasedOnChildren(this.eventsListView);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add_new_event:
+                NewEventDialog newEventDialog = new NewEventDialog(getContext(), this) {
+                    @Override
+                    public void onEventReturn(Event resultEvent) {
+                        addNewEvent(resultEvent);
+                    }
+                };
+                newEventDialog.show();
+                break;
+            default:
+                break;
+        }
     }
 }
