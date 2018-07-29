@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.activities.LineupPresentationActivity;
 import com.highsoftware96.songsqueues.adapter.LineupEventsListAdapter;
+import com.highsoftware96.songsqueues.dialogs.NotificationSelectEventDialog;
+import com.highsoftware96.songsqueues.models.local.Event;
+import com.highsoftware96.songsqueues.models.local.Lineup;
 
 
 public class LineupPresentationDetailsFragment extends Fragment {
@@ -82,12 +85,18 @@ public class LineupPresentationDetailsFragment extends Fragment {
     public void notificationEventItemAction(int eventPositionInList) {
         // TODO: l'utente ha clickato il bottone di modifica della notifica un evento
         Snackbar.make(getActivity().findViewById(android.R.id.content), "Notifiche evento #" + eventPositionInList, Snackbar.LENGTH_SHORT).show();
-
+        NotificationSelectEventDialog notificationSelectEventDialog = new NotificationSelectEventDialog(getContext(), this, ((LineupPresentationActivity) getActivity()).getSelectedLineupToShow().getEvents().get(eventPositionInList).clone(), eventPositionInList);
+        notificationSelectEventDialog.show();
     }
 
     public void deleteEventItemAction(int eventPositionInList) {
         // TODO: l'utente ha clickato il bottone di cancellazione di un evento
         Snackbar.make(getActivity().findViewById(android.R.id.content), "Cancellazione evento #" + eventPositionInList, Snackbar.LENGTH_SHORT).show();
 
+    }
+
+    public void saveEventData(Event referredLineupEvent, int positionInList) {
+        ((LineupPresentationActivity) getActivity()).saveEventData(referredLineupEvent, positionInList);
+        this.eventsListAdapter.notifyDataSetChanged();
     }
 }

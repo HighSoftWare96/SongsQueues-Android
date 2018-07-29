@@ -3,6 +3,7 @@ package com.highsoftware96.songsqueues.exampledata;
 import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.constants.LineUpSystemCategoriesNames;
 import com.highsoftware96.songsqueues.models.local.Event;
+import com.highsoftware96.songsqueues.models.local.EventNotificationMode;
 import com.highsoftware96.songsqueues.models.local.Lineup;
 import com.highsoftware96.songsqueues.models.local.LineupCategory;
 
@@ -26,7 +27,7 @@ public class ExampleDataManager {
 
     public static ArrayList<Event> getEvents() {
         ArrayList<Event> result = new ArrayList<>();
-        result.add(new Event("First event", new Date(), new Timestamp(0)));
+        result.add(new Event("First event", new Date(), EventNotificationMode.ONE_HOUR_BEFORE_DEF));
         result.add(new Event("Second event", new Date(), null));
         result.add(new Event("Third event", new Date(), null));
         return result;

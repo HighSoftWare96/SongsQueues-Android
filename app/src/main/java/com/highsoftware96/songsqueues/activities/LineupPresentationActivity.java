@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.highsoftware96.songsqueues.R;
 import com.highsoftware96.songsqueues.adapter.LineupPresentationTabsAdapter;
+import com.highsoftware96.songsqueues.models.local.Event;
 import com.highsoftware96.songsqueues.models.local.Lineup;
 
 public class LineupPresentationActivity extends AppCompatActivity {
@@ -125,5 +126,10 @@ public class LineupPresentationActivity extends AppCompatActivity {
 
     public Lineup getSelectedLineupToShow() {
         return selectedLineupToShow;
+    }
+
+    public void saveEventData(Event referredLineupEvent, int positionInList) {
+        // TODO: Salvare i dati dell'evento modificato
+        this.selectedLineupToShow.getEvents().set(positionInList, referredLineupEvent);
     }
 }

@@ -3,6 +3,7 @@
     package="com.highsoftware96.songsqueues">
 
     <application
+        android:name=".SupportApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

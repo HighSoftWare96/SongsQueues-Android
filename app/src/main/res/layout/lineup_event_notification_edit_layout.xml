@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom|center_vertical|center_horizontal"
-    android:orientation="vertical">
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/event_title_notification_edit_picker"
@@ -20,6 +21,22 @@
         android:id="@+id/divider3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/event_edit_date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="date"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
     <Switch
@@ -45,17 +62,15 @@
     <View
         android:id="@+id/divider4"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|start|end"
+        android:gravity="bottom|end"
         android:orientation="horizontal"
-        android:padding="20dp"
-        android:paddingEnd="20dp"
-        android:paddingStart="190dp">
+        android:paddingStart="150dp">
 
         <Button
             android:id="@+id/dialog_ok_btn"
@@ -70,7 +85,7 @@
         <Button
             android:id="@+id/dialog_cancel_btn"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="10dp"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
